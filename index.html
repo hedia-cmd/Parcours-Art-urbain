@@ -312,6 +312,7 @@
       overflow:hidden;
       box-shadow:var(--shadow);
       transition:transform .2s ease, border-color .2s ease;
+      cursor:pointer;
     }
 
     .artist-card:hover{
@@ -380,6 +381,151 @@
       font-size:.92rem;
     }
 
+    .artist-modal{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      display:none;
+    }
+
+    .artist-modal.is-open{
+      display:block;
+    }
+
+    .artist-modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(3,8,18,.86);
+      backdrop-filter: blur(14px);
+    }
+
+    .artist-modal-panel{
+      position:relative;
+      z-index:2;
+      width:min(calc(100% - 28px), 1280px);
+      height:calc(100vh - 28px);
+      margin:14px auto;
+      background:linear-gradient(180deg, rgba(15,24,40,.98), rgba(8,14,24,.98));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:24px;
+      box-shadow:0 30px 90px rgba(0,0,0,.48);
+      overflow:hidden;
+    }
+
+    .artist-modal-content{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      height:100%;
+    }
+
+    .artist-modal-image-wrap{
+      background:#09111c;
+      height:100%;
+    }
+
+    .artist-modal-image-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .artist-modal-text{
+      position:relative;
+      padding:44px 42px 40px;
+      overflow:auto;
+    }
+
+    .artist-modal-kicker{
+      color:var(--accent);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.75rem;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .artist-modal-counter{
+      position:absolute;
+      top:24px;
+      right:92px;
+      color:var(--muted);
+      font-size:.95rem;
+      font-weight:700;
+      letter-spacing:.04em;
+    }
+
+    .artist-modal-text h3{
+      margin:0 0 8px;
+      font-size:clamp(2rem, 4vw, 3.5rem);
+      line-height:.98;
+      letter-spacing:-.04em;
+      max-width:10ch;
+    }
+
+    .artist-modal-location{
+      color:var(--accent-2);
+      font-weight:700;
+      margin-bottom:18px;
+      font-size:1rem;
+    }
+
+    .artist-modal-short{
+      color:var(--text);
+      font-size:1.08rem;
+      line-height:1.6;
+      margin:0 0 16px;
+    }
+
+    .artist-modal-full{
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.8;
+      margin:0;
+    }
+
+    .artist-modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      z-index:4;
+      width:46px;
+      height:46px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-size:1.8rem;
+      line-height:1;
+      cursor:pointer;
+    }
+
+    .artist-modal-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:4;
+      width:54px;
+      height:54px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      font-size:2rem;
+      line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .artist-modal-nav.prev{ left:16px; }
+    .artist-modal-nav.next{ right:16px; }
+
+    .artist-modal-close:hover,
+    .artist-modal-nav:hover{
+      background:rgba(255,255,255,.14);
+    }
+
     @media (max-width: 1100px){
       .artist-gallery{
         grid-template-columns:repeat(3, 1fr);
@@ -402,6 +548,39 @@
       .hero-card{
         min-height:320px;
       }
+
+      .artist-modal-panel{
+        width:min(calc(100% - 18px), 1280px);
+        height:calc(100vh - 18px);
+        margin:9px auto;
+      }
+
+      .artist-modal-content{
+        grid-template-columns:1fr;
+      }
+
+      .artist-modal-image-wrap{
+        height:42vh;
+        min-height:280px;
+      }
+
+      .artist-modal-text{
+        padding:28px 22px 24px;
+      }
+
+      .artist-modal-counter{
+        top:18px;
+        right:74px;
+      }
+
+      .artist-modal-nav{
+        top:auto;
+        bottom:14px;
+        transform:none;
+      }
+
+      .artist-modal-nav.prev{ left:14px; }
+      .artist-modal-nav.next{ right:14px; }
     }
 
     @media (max-width: 800px){
@@ -440,6 +619,10 @@
 
       .artist-card img{
         height:260px;
+      }
+
+      .artist-modal-text h3{
+        max-width:none;
       }
     }
   </style>
@@ -601,91 +784,131 @@
         </div>
 
         <div class="artist-gallery">
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="Reso"
+            data-location="Toulouse"
+            data-image="https://images.unsplash.com/photo-1545231027-637d2f6210f8?auto=format&fit=crop&w=1400&q=80"
+            data-short="Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière du graffiti et de l’abstraction."
+            data-full="Le travail de Reso prolonge l’héritage du graffiti vers une écriture plus libre, plus abstraite et plus organique. La ligne devient mouvement, rythme, tension. Ses compositions donnent à voir une énergie en circulation, une manière d’habiter le mur par la courbe, l’enchevêtrement et la vibration du geste."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1545231027-637d2f6210f8?auto=format&fit=crop&w=1200&q=80" alt="Reso" />
             <div class="artist-card-body">
               <h3>Reso <span>— Toulouse</span></h3>
-              <p>
-                Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière
-                du graffiti et de l’abstraction.
-              </p>
+              <p>Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière du graffiti et de l’abstraction.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="El Tono"
+            data-location="Toulouse"
+            data-image="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80"
+            data-short="Une pratique qui joue avec la ville, le regard et la place du spectateur dans l’espace public."
+            data-full="Le travail d’El Tono interroge la manière dont nous traversons la ville et percevons l’espace public. Ses interventions déplacent le regard, créent du jeu dans le paysage urbain et invitent le spectateur à reconsidérer sa propre place dans l’environnement quotidien."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80" alt="El Tono" />
             <div class="artist-card-body">
               <h3>El Tono <span>— Toulouse</span></h3>
-              <p>
-                Une pratique qui joue avec la ville, le regard et la place du spectateur
-                dans l’espace public.
-              </p>
+              <p>Une pratique qui joue avec la ville, le regard et la place du spectateur dans l’espace public.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="Wow123"
+            data-location="Allemagne"
+            data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80"
+            data-short="Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales."
+            data-full="Wow123 développe une pratique où se rencontrent abstraction, éléments figuratifs et culture graffiti. Son travail témoigne d’une circulation internationale des formes et d’une volonté constante d’expérimentation picturale. La composition devient un terrain d’échanges entre énergie urbaine, graphisme et construction visuelle."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Wow123" />
             <div class="artist-card-body">
               <h3>Wow123 <span>— Allemagne</span></h3>
-              <p>
-                Un langage visuel hybride mêlant abstraction, typographie graffiti et
-                influences internationales.
-              </p>
+              <p>Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="ECB"
+            data-location="Allemagne"
+            data-image="https://images.unsplash.com/photo-1529429617124-aee711a5ac1c?auto=format&fit=crop&w=1400&q=80"
+            data-short="Des portraits monumentaux, monochromes et puissants, qui installent une présence humaine dans la ville."
+            data-full="ECB déploie dans l’espace urbain des figures monumentales, souvent réalisées dans une palette réduite. Le portrait devient ici présence, mémoire, intensité silencieuse. Ces visages inscrits dans l’architecture réintroduisent une dimension humaine forte dans les grandes échelles de la ville contemporaine."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1529429617124-aee711a5ac1c?auto=format&fit=crop&w=1200&q=80" alt="ECB" />
             <div class="artist-card-body">
               <h3>ECB <span>— Allemagne</span></h3>
-              <p>
-                Des portraits monumentaux, monochromes et puissants, qui installent une
-                présence humaine dans la ville.
-              </p>
+              <p>Des portraits monumentaux, monochromes et puissants, qui installent une présence humaine dans la ville.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="Jace"
+            data-location="Réunion"
+            data-image="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1400&q=80"
+            data-short="L’auteur des gouzous, figures devenues emblématiques de l’espace public réunionnais et bien au-delà."
+            data-full="Avec ses gouzous, Jace a créé un univers immédiatement reconnaissable, à la fois populaire, ironique et profondément ancré dans la rue. Son travail circule entre territoires, contextes et supports, en conservant une force visuelle directe et une capacité rare à dialoguer avec tous les publics."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=80" alt="Jace" />
             <div class="artist-card-body">
               <h3>Jace <span>— Réunion</span></h3>
-              <p>
-                L’auteur des gouzous, figures devenues emblématiques de l’espace public
-                réunionnais et bien au-delà.
-              </p>
+              <p>L’auteur des gouzous, figures devenues emblématiques de l’espace public réunionnais et bien au-delà.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="Gorg One"
+            data-location="Le Port"
+            data-image="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1400&q=80"
+            data-short="Une peinture poétique nourrie par la nature, le souffle et le mouvement, entre énergie et délicatesse."
+            data-full="Le travail de Gorg One entretient un lien fort avec le vivant, le mouvement et les formes organiques. Sa peinture mêle intensité chromatique, poésie visuelle et sens du déploiement mural. L’espace devient surface sensible, traversée par des forces, des souffles et des métamorphoses."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80" alt="Gorg One" />
             <div class="artist-card-body">
               <h3>Gorg One <span>— Le Port</span></h3>
-              <p>
-                Une peinture poétique nourrie par la nature, le souffle et le mouvement,
-                entre énergie et délicatesse.
-              </p>
+              <p>Une peinture poétique nourrie par la nature, le souffle et le mouvement, entre énergie et délicatesse.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="Mégot"
+            data-location="Réunion"
+            data-image="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1400&q=80"
+            data-short="Une œuvre liée à la roche, au signe et à une palette resserrée, entre matière, lenteur et intensité."
+            data-full="Le travail de Mégot dialogue avec la matière et avec une palette volontairement restreinte. La roche, le signe, la densité du support et la précision du geste participent d’une écriture singulière. Il s’agit moins d’ajouter à la surface que de révéler une force déjà présente dans la matière."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1200&q=80" alt="Mégot" />
             <div class="artist-card-body">
               <h3>Mégot <span>— Réunion</span></h3>
-              <p>
-                Une œuvre liée à la roche, au signe et à une palette resserrée, entre
-                matière, lenteur et intensité.
-              </p>
+              <p>Une œuvre liée à la roche, au signe et à une palette resserrée, entre matière, lenteur et intensité.</p>
             </div>
           </article>
 
-          <article class="artist-card">
+          <article
+            class="artist-card"
+            data-name="Zaïtoune"
+            data-location="Réunion"
+            data-image="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1400&q=80"
+            data-short="Un univers de formes et de mandalas, où le dessin devient espace sensible et reflet intérieur."
+            data-full="Le travail de Zaïtoune déploie un vocabulaire graphique précis, nourri de motifs, de mandalas et de formes répétitives. Le dessin y devient espace de concentration, de respiration et de projection sensible. Cette écriture délicate apporte au parcours une autre intensité, plus intérieure mais tout aussi structurante."
+            tabindex="0"
+          >
             <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80" alt="Zaïtoune" />
             <div class="artist-card-body">
               <h3>Zaïtoune <span>— Réunion</span></h3>
-              <p>
-                Un univers de formes et de mandalas, où le dessin devient espace sensible
-                et reflet intérieur.
-              </p>
+              <p>Un univers de formes et de mandalas, où le dessin devient espace sensible et reflet intérieur.</p>
             </div>
           </article>
         </div>
@@ -733,6 +956,119 @@
       </div>
     </div>
   </footer>
+
+  <div class="artist-modal" id="artistModal" aria-hidden="true">
+    <div class="artist-modal-backdrop" id="artistModalBackdrop"></div>
+
+    <div class="artist-modal-panel" role="dialog" aria-modal="true" aria-labelledby="artistModalTitle">
+      <button class="artist-modal-close" id="artistModalClose" aria-label="Fermer">×</button>
+
+      <button class="artist-modal-nav prev" id="artistPrev" aria-label="Artiste précédent">‹</button>
+      <button class="artist-modal-nav next" id="artistNext" aria-label="Artiste suivant">›</button>
+
+      <div class="artist-modal-content">
+        <div class="artist-modal-image-wrap">
+          <img id="artistModalImage" src="" alt="" />
+        </div>
+
+        <div class="artist-modal-text">
+          <div class="artist-modal-counter" id="artistModalCounter">1 / 8</div>
+          <div class="artist-modal-kicker">Artiste</div>
+          <h3 id="artistModalTitle"></h3>
+          <div class="artist-modal-location" id="artistModalLocation"></div>
+          <p class="artist-modal-short" id="artistModalShort"></p>
+          <p class="artist-modal-full" id="artistModalFull"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const cards = Array.from(document.querySelectorAll('.artist-card'));
+      const modal = document.getElementById('artistModal');
+      const backdrop = document.getElementById('artistModalBackdrop');
+      const closeBtn = document.getElementById('artistModalClose');
+      const prevBtn = document.getElementById('artistPrev');
+      const nextBtn = document.getElementById('artistNext');
+
+      const modalImage = document.getElementById('artistModalImage');
+      const modalTitle = document.getElementById('artistModalTitle');
+      const modalLocation = document.getElementById('artistModalLocation');
+      const modalShort = document.getElementById('artistModalShort');
+      const modalFull = document.getElementById('artistModalFull');
+      const modalCounter = document.getElementById('artistModalCounter');
+
+      let currentIndex = 0;
+
+      function renderArtist(index) {
+        const card = cards[index];
+        if (!card) return;
+
+        currentIndex = index;
+
+        const name = card.dataset.name || '';
+        const location = card.dataset.location || '';
+        const image = card.dataset.image || '';
+        const shortText = card.dataset.short || '';
+        const fullText = card.dataset.full || '';
+
+        modalImage.src = image;
+        modalImage.alt = name;
+        modalTitle.textContent = name;
+        modalLocation.textContent = location;
+        modalShort.textContent = shortText;
+        modalFull.textContent = fullText;
+        modalCounter.textContent = (index + 1) + ' / ' + cards.length;
+      }
+
+      function openModal(index) {
+        renderArtist(index);
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function showNext() {
+        const nextIndex = (currentIndex + 1) % cards.length;
+        renderArtist(nextIndex);
+      }
+
+      function showPrev() {
+        const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+        renderArtist(prevIndex);
+      }
+
+      cards.forEach((card, index) => {
+        card.addEventListener('click', () => openModal(index));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(index);
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      nextBtn.addEventListener('click', showNext);
+      prevBtn.addEventListener('click', showPrev);
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('is-open')) return;
+
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+      });
+    })();
+  </script>
 
 </body>
 </html>
