@@ -421,12 +421,16 @@
     .artist-modal-image-wrap{
       background:#09111c;
       height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
     }
 
     .artist-modal-image-wrap img{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
     }
 
     .artist-modal-text{
@@ -770,150 +774,150 @@
       </div>
     </section>
 
-   <section id="artistes" class="section">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <h2>Les artistes</h2>
-        <p class="section-intro">
-          Une galerie d’artistes invités et d’artistes du territoire, réunis autour
-          d’une même ambition&nbsp;: transformer l’espace urbain en lieu de création,
-          de dialogue et de partage.
-        </p>
+    <section id="artistes" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Les artistes</h2>
+            <p class="section-intro">
+              Une galerie d’artistes invités et d’artistes du territoire, réunis autour
+              d’une même ambition&nbsp;: transformer l’espace urbain en lieu de création,
+              de dialogue et de partage.
+            </p>
+          </div>
+        </div>
+
+        <div class="artist-gallery">
+          <article
+            class="artist-card"
+            data-name="Reso"
+            data-location="Toulouse"
+            data-image="images/reso.avif"
+            data-short="Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière du graffiti et de l’abstraction."
+            data-full="Le travail de Reso prolonge l’héritage du graffiti vers une écriture plus libre, plus abstraite et plus organique. La ligne devient mouvement, rythme, tension. Ses compositions donnent à voir une énergie en circulation, une manière d’habiter le mur par la courbe, l’enchevêtrement et la vibration du geste."
+            tabindex="0"
+          >
+            <img src="images/reso.avif" alt="Reso" />
+            <div class="artist-card-body">
+              <h3>Reso <span>— Toulouse</span></h3>
+              <p>Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière du graffiti et de l’abstraction.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="El Tono"
+            data-location="Toulouse"
+            data-image="images/reso2.avif"
+            data-short="Une pratique qui joue avec la ville, le regard et la place du spectateur dans l’espace public."
+            data-full="Le travail d’El Tono interroge la manière dont nous traversons la ville et percevons l’espace public. Ses interventions déplacent le regard, créent du jeu dans le paysage urbain et invitent le spectateur à reconsidérer sa propre place dans l’environnement quotidien."
+            tabindex="0"
+          >
+            <img src="images/reso2.avif" alt="El Tono" />
+            <div class="artist-card-body">
+              <h3>El Tono <span>— Toulouse</span></h3>
+              <p>Une pratique qui joue avec la ville, le regard et la place du spectateur dans l’espace public.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="Wow123"
+            data-location="Allemagne"
+            data-image="images/seth.avif"
+            data-short="Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales."
+            data-full="Wow123 développe une pratique où se rencontrent abstraction, éléments figuratifs et culture graffiti. Son travail témoigne d’une circulation internationale des formes et d’une volonté constante d’expérimentation picturale. La composition devient un terrain d’échanges entre énergie urbaine, graphisme et construction visuelle."
+            tabindex="0"
+          >
+            <img src="images/seth.avif" alt="Wow123" />
+            <div class="artist-card-body">
+              <h3>Wow123 <span>— Allemagne</span></h3>
+              <p>Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="ECB"
+            data-location="Allemagne"
+            data-image="images/ecb1.avif"
+            data-short="Des portraits monumentaux, monochromes et puissants, qui installent une présence humaine dans la ville."
+            data-full="ECB déploie dans l’espace urbain des figures monumentales, souvent réalisées dans une palette réduite. Le portrait devient ici présence, mémoire, intensité silencieuse. Ces visages inscrits dans l’architecture réintroduisent une dimension humaine forte dans les grandes échelles de la ville contemporaine."
+            tabindex="0"
+          >
+            <img src="images/ecb1.avif" alt="ECB" />
+            <div class="artist-card-body">
+              <h3>ECB <span>— Allemagne</span></h3>
+              <p>Des portraits monumentaux, monochromes et puissants, qui installent une présence humaine dans la ville.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="Jace"
+            data-location="Réunion"
+            data-image="images/jace@ceet.avif"
+            data-short="L’auteur des gouzous, figures devenues emblématiques de l’espace public réunionnais et bien au-delà."
+            data-full="Avec ses gouzous, Jace a créé un univers immédiatement reconnaissable, à la fois populaire, ironique et profondément ancré dans la rue. Son travail circule entre territoires, contextes et supports, en conservant une force visuelle directe et une capacité rare à dialoguer avec tous les publics."
+            tabindex="0"
+          >
+            <img src="images/jace@ceet.avif" alt="Jace" />
+            <div class="artist-card-body">
+              <h3>Jace <span>— Réunion</span></h3>
+              <p>L’auteur des gouzous, figures devenues emblématiques de l’espace public réunionnais et bien au-delà.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="Gorg One"
+            data-location="Le Port"
+            data-image="images/gorg.avif"
+            data-short="Une peinture poétique nourrie par la nature, le souffle et le mouvement, entre énergie et délicatesse."
+            data-full="Le travail de Gorg One entretient un lien fort avec le vivant, le mouvement et les formes organiques. Sa peinture mêle intensité chromatique, poésie visuelle et sens du déploiement mural. L’espace devient surface sensible, traversée par des forces, des souffles et des métamorphoses."
+            tabindex="0"
+          >
+            <img src="images/gorg.avif" alt="Gorg One" />
+            <div class="artist-card-body">
+              <h3>Gorg One <span>— Le Port</span></h3>
+              <p>Une peinture poétique nourrie par la nature, le souffle et le mouvement, entre énergie et délicatesse.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="Mégot"
+            data-location="Réunion"
+            data-image="images/mum.avif"
+            data-short="Une œuvre liée à la roche, au signe et à une palette resserrée, entre matière, lenteur et intensité."
+            data-full="Le travail de Mégot dialogue avec la matière et avec une palette volontairement restreinte. La roche, le signe, la densité du support et la précision du geste participent d’une écriture singulière. Il s’agit moins d’ajouter à la surface que de révéler une force déjà présente dans la matière."
+            tabindex="0"
+          >
+            <img src="images/mum.avif" alt="Mégot" />
+            <div class="artist-card-body">
+              <h3>Mégot <span>— Réunion</span></h3>
+              <p>Une œuvre liée à la roche, au signe et à une palette resserrée, entre matière, lenteur et intensité.</p>
+            </div>
+          </article>
+
+          <article
+            class="artist-card"
+            data-name="Zaïtoune"
+            data-location="Réunion"
+            data-image="images/galvis.avif"
+            data-short="Un univers de formes et de mandalas, où le dessin devient espace sensible et reflet intérieur."
+            data-full="Le travail de Zaïtoune déploie un vocabulaire graphique précis, nourri de motifs, de mandalas et de formes répétitives. Le dessin y devient espace de concentration, de respiration et de projection sensible. Cette écriture délicate apporte au parcours une autre intensité, plus intérieure mais tout aussi structurante."
+            tabindex="0"
+          >
+            <img src="images/galvis.avif" alt="Zaïtoune" />
+            <div class="artist-card-body">
+              <h3>Zaïtoune <span>— Réunion</span></h3>
+              <p>Un univers de formes et de mandalas, où le dessin devient espace sensible et reflet intérieur.</p>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
-
-    <div class="artist-gallery">
-      <article
-        class="artist-card"
-        data-name="Reso"
-        data-location="Toulouse"
-        data-image="images/reso.avif"
-        data-short="Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière du graffiti et de l’abstraction."
-        data-full="Le travail de Reso prolonge l’héritage du graffiti vers une écriture plus libre, plus abstraite et plus organique. La ligne devient mouvement, rythme, tension. Ses compositions donnent à voir une énergie en circulation, une manière d’habiter le mur par la courbe, l’enchevêtrement et la vibration du geste."
-        tabindex="0"
-      >
-        <img src="images/reso.avif" alt="Reso" />
-        <div class="artist-card-body">
-          <h3>Reso <span>— Toulouse</span></h3>
-          <p>Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière du graffiti et de l’abstraction.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="El Tono"
-        data-location="Toulouse"
-        data-image="images/reso2.avif"
-        data-short="Une pratique qui joue avec la ville, le regard et la place du spectateur dans l’espace public."
-        data-full="Le travail d’El Tono interroge la manière dont nous traversons la ville et percevons l’espace public. Ses interventions déplacent le regard, créent du jeu dans le paysage urbain et invitent le spectateur à reconsidérer sa propre place dans l’environnement quotidien."
-        tabindex="0"
-      >
-        <img src="images/reso2.avif" alt="El Tono" />
-        <div class="artist-card-body">
-          <h3>El Tono <span>— Toulouse</span></h3>
-          <p>Une pratique qui joue avec la ville, le regard et la place du spectateur dans l’espace public.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="Wow123"
-        data-location="Allemagne"
-        data-image="images/seth.avif"
-        data-short="Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales."
-        data-full="Wow123 développe une pratique où se rencontrent abstraction, éléments figuratifs et culture graffiti. Son travail témoigne d’une circulation internationale des formes et d’une volonté constante d’expérimentation picturale. La composition devient un terrain d’échanges entre énergie urbaine, graphisme et construction visuelle."
-        tabindex="0"
-      >
-        <img src="images/seth.avif" alt="Wow123" />
-        <div class="artist-card-body">
-          <h3>Wow123 <span>— Allemagne</span></h3>
-          <p>Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="ECB"
-        data-location="Allemagne"
-        data-image="images/ecb1.avif"
-        data-short="Des portraits monumentaux, monochromes et puissants, qui installent une présence humaine dans la ville."
-        data-full="ECB déploie dans l’espace urbain des figures monumentales, souvent réalisées dans une palette réduite. Le portrait devient ici présence, mémoire, intensité silencieuse. Ces visages inscrits dans l’architecture réintroduisent une dimension humaine forte dans les grandes échelles de la ville contemporaine."
-        tabindex="0"
-      >
-        <img src="images/ecb1.avif" alt="ECB" />
-        <div class="artist-card-body">
-          <h3>ECB <span>— Allemagne</span></h3>
-          <p>Des portraits monumentaux, monochromes et puissants, qui installent une présence humaine dans la ville.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="Jace"
-        data-location="Réunion"
-        data-image="images/jace@ceet.avif"
-        data-short="L’auteur des gouzous, figures devenues emblématiques de l’espace public réunionnais et bien au-delà."
-        data-full="Avec ses gouzous, Jace a créé un univers immédiatement reconnaissable, à la fois populaire, ironique et profondément ancré dans la rue. Son travail circule entre territoires, contextes et supports, en conservant une force visuelle directe et une capacité rare à dialoguer avec tous les publics."
-        tabindex="0"
-      >
-        <img src="images/jace@ceet.avif" alt="Jace" />
-        <div class="artist-card-body">
-          <h3>Jace <span>— Réunion</span></h3>
-          <p>L’auteur des gouzous, figures devenues emblématiques de l’espace public réunionnais et bien au-delà.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="Gorg One"
-        data-location="Le Port"
-        data-image="images/gorg.avif"
-        data-short="Une peinture poétique nourrie par la nature, le souffle et le mouvement, entre énergie et délicatesse."
-        data-full="Le travail de Gorg One entretient un lien fort avec le vivant, le mouvement et les formes organiques. Sa peinture mêle intensité chromatique, poésie visuelle et sens du déploiement mural. L’espace devient surface sensible, traversée par des forces, des souffles et des métamorphoses."
-        tabindex="0"
-      >
-        <img src="images/gorg.avif" alt="Gorg One" />
-        <div class="artist-card-body">
-          <h3>Gorg One <span>— Le Port</span></h3>
-          <p>Une peinture poétique nourrie par la nature, le souffle et le mouvement, entre énergie et délicatesse.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="Mégot"
-        data-location="Réunion"
-        data-image="images/mum.avif"
-        data-short="Une œuvre liée à la roche, au signe et à une palette resserrée, entre matière, lenteur et intensité."
-        data-full="Le travail de Mégot dialogue avec la matière et avec une palette volontairement restreinte. La roche, le signe, la densité du support et la précision du geste participent d’une écriture singulière. Il s’agit moins d’ajouter à la surface que de révéler une force déjà présente dans la matière."
-        tabindex="0"
-      >
-        <img src="images/mum.avif" alt="Mégot" />
-        <div class="artist-card-body">
-          <h3>Mégot <span>— Réunion</span></h3>
-          <p>Une œuvre liée à la roche, au signe et à une palette resserrée, entre matière, lenteur et intensité.</p>
-        </div>
-      </article>
-
-      <article
-        class="artist-card"
-        data-name="Zaïtoune"
-        data-location="Réunion"
-        data-image="images/galvis.avif"
-        data-short="Un univers de formes et de mandalas, où le dessin devient espace sensible et reflet intérieur."
-        data-full="Le travail de Zaïtoune déploie un vocabulaire graphique précis, nourri de motifs, de mandalas et de formes répétitives. Le dessin y devient espace de concentration, de respiration et de projection sensible. Cette écriture délicate apporte au parcours une autre intensité, plus intérieure mais tout aussi structurante."
-        tabindex="0"
-      >
-        <img src="images/galvis.avif" alt="Zaïtoune" />
-        <div class="artist-card-body">
-          <h3>Zaïtoune <span>— Réunion</span></h3>
-          <p>Un univers de formes et de mandalas, où le dessin devient espace sensible et reflet intérieur.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+    </section>
 
     <section id="impact" class="section">
       <div class="container impact">
