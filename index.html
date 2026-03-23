@@ -299,43 +299,54 @@
       font-weight:700;
     }
 
-    .artists{
+    .artist-gallery{
       display:grid;
-      grid-template-columns:repeat(2,1fr);
+      grid-template-columns:repeat(4, 1fr);
       gap:18px;
     }
 
-    .artist{
-      display:grid;
-      grid-template-columns: 220px 1fr;
-      gap:18px;
+    .artist-card{
       background:var(--panel);
       border:1px solid var(--panel-border);
-      border-radius:22px;
+      border-radius:20px;
       overflow:hidden;
       box-shadow:var(--shadow);
+      transition:transform .2s ease, border-color .2s ease;
     }
 
-    .artist img{
+    .artist-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(79,209,197,.38);
+    }
+
+    .artist-card img{
       width:100%;
-      height:100%;
-      min-height:220px;
+      height:240px;
       object-fit:cover;
+      background:#0a0f18;
     }
 
-    .artist-body{
-      padding:20px 20px 20px 0;
+    .artist-card-body{
+      padding:16px;
     }
 
-    .artist-body h3{
+    .artist-card-body h3{
       margin:0 0 8px;
-      font-size:1.25rem;
+      font-size:1.05rem;
+      line-height:1.25;
     }
 
-    .artist-body p{
+    .artist-card-body h3 span{
+      color:var(--muted);
+      font-weight:500;
+      font-size:.95rem;
+    }
+
+    .artist-card-body p{
       margin:0;
       color:var(--muted);
-      font-size:.98rem;
+      font-size:.95rem;
+      line-height:1.55;
     }
 
     .impact{
@@ -369,22 +380,19 @@
       font-size:.92rem;
     }
 
+    @media (max-width: 1100px){
+      .artist-gallery{
+        grid-template-columns:repeat(3, 1fr);
+      }
+    }
+
     @media (max-width: 980px){
       .hero-grid,
       .impact,
-      .artists,
       .video-grid,
       .media-grid,
       .cards-3{
         grid-template-columns:1fr;
-      }
-
-      .artist{
-        grid-template-columns:1fr;
-      }
-
-      .artist-body{
-        padding:0 18px 20px;
       }
 
       .hero-copy{
@@ -393,6 +401,12 @@
 
       .hero-card{
         min-height:320px;
+      }
+    }
+
+    @media (max-width: 800px){
+      .artist-gallery{
+        grid-template-columns:repeat(2, 1fr);
       }
     }
 
@@ -416,6 +430,16 @@
 
       .media img{
         height:240px;
+      }
+    }
+
+    @media (max-width: 560px){
+      .artist-gallery{
+        grid-template-columns:1fr;
+      }
+
+      .artist-card img{
+        height:260px;
       }
     }
   </style>
@@ -569,76 +593,98 @@
           <div>
             <h2>Les artistes</h2>
             <p class="section-intro">
-              Le projet réunit artistes invités et artistes ancrés sur le territoire,
-              dans une logique de dialogue entre écritures, générations et contextes urbains. :contentReference[oaicite:1]{index=1}
+              Une galerie d’artistes invités et d’artistes du territoire, réunis autour
+              d’une même ambition&nbsp;: transformer l’espace urbain en lieu de création,
+              de dialogue et de partage.
             </p>
           </div>
         </div>
 
-        <div class="artists">
-          <article class="artist">
-            <img src="https://images.unsplash.com/photo-1545231027-637d2f6210f8?auto=format&fit=crop&w=1200&q=80" alt="Artiste Reso" />
-            <div class="artist-body">
-              <h3>Reso</h3>
+        <div class="artist-gallery">
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1545231027-637d2f6210f8?auto=format&fit=crop&w=1200&q=80" alt="Reso" />
+            <div class="artist-card-body">
+              <h3>Reso <span>— Toulouse</span></h3>
               <p>
-                Une écriture portée par le mouvement, la courbe et l’énergie. Son travail
-                s’inscrit dans une recherche graphique issue du graffiti, tendue vers
-                l’abstraction et le rythme du geste. :contentReference[oaicite:2]{index=2}
+                Une écriture portée par le mouvement, la courbe et l’énergie, à la lisière
+                du graffiti et de l’abstraction.
               </p>
             </div>
           </article>
 
-          <article class="artist">
-            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80" alt="Artiste El Tono" />
-            <div class="artist-body">
-              <h3>El Tono</h3>
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80" alt="El Tono" />
+            <div class="artist-card-body">
+              <h3>El Tono <span>— Toulouse</span></h3>
               <p>
-                Un travail attentif à la ville, à la limite entre espace public et espace privé,
-                où l’intervention devient jeu perceptif, déplacement du regard et mise en tension du quotidien. :contentReference[oaicite:3]{index=3}
+                Une pratique qui joue avec la ville, le regard et la place du spectateur
+                dans l’espace public.
               </p>
             </div>
           </article>
 
-          <article class="artist">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Artiste Wow123" />
-            <div class="artist-body">
-              <h3>Wow123</h3>
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Wow123" />
+            <div class="artist-card-body">
+              <h3>Wow123 <span>— Allemagne</span></h3>
               <p>
-                Une pratique hybride mêlant abstraction, éléments figuratifs et culture graffiti,
-                avec une forte dynamique de circulation internationale et de recherche picturale. :contentReference[oaicite:4]{index=4}
+                Un langage visuel hybride mêlant abstraction, typographie graffiti et
+                influences internationales.
               </p>
             </div>
           </article>
 
-          <article class="artist">
-            <img src="https://images.unsplash.com/photo-1529429617124-aee711a5ac1c?auto=format&fit=crop&w=1200&q=80" alt="Artiste ECB" />
-            <div class="artist-body">
-              <h3>ECB</h3>
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1529429617124-aee711a5ac1c?auto=format&fit=crop&w=1200&q=80" alt="ECB" />
+            <div class="artist-card-body">
+              <h3>ECB <span>— Allemagne</span></h3>
               <p>
-                Des portraits monumentaux, souvent monochromes, qui installent dans la ville
-                des présences silencieuses et puissantes, à la fois humaines et architecturales. :contentReference[oaicite:5]{index=5}
+                Des portraits monumentaux, monochromes et puissants, qui installent une
+                présence humaine dans la ville.
               </p>
             </div>
           </article>
 
-          <article class="artist">
-            <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=80" alt="Artistes locaux" />
-            <div class="artist-body">
-              <h3>Artistes du territoire</h3>
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=80" alt="Jace" />
+            <div class="artist-card-body">
+              <h3>Jace <span>— Réunion</span></h3>
               <p>
-                Jace, Gorg One, Mégot, Zaïtoune et d’autres artistes locaux donnent au projet
-                son ancrage vivant, sa singularité et sa capacité à dialoguer avec les imaginaires du lieu. :contentReference[oaicite:6]{index=6}
+                L’auteur des gouzous, figures devenues emblématiques de l’espace public
+                réunionnais et bien au-delà.
               </p>
             </div>
           </article>
 
-          <article class="artist">
-            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80" alt="Processus collectif" />
-            <div class="artist-body">
-              <h3>Une création collective</h3>
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80" alt="Gorg One" />
+            <div class="artist-card-body">
+              <h3>Gorg One <span>— Le Port</span></h3>
               <p>
-                Au-delà des signatures, le projet valorise le processus&nbsp;: rencontres,
-                ateliers, présence dans les quartiers, réalisation in situ et inauguration commune. :contentReference[oaicite:7]{index=7}
+                Une peinture poétique nourrie par la nature, le souffle et le mouvement,
+                entre énergie et délicatesse.
+              </p>
+            </div>
+          </article>
+
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1200&q=80" alt="Mégot" />
+            <div class="artist-card-body">
+              <h3>Mégot <span>— Réunion</span></h3>
+              <p>
+                Une œuvre liée à la roche, au signe et à une palette resserrée, entre
+                matière, lenteur et intensité.
+              </p>
+            </div>
+          </article>
+
+          <article class="artist-card">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80" alt="Zaïtoune" />
+            <div class="artist-card-body">
+              <h3>Zaïtoune <span>— Réunion</span></h3>
+              <p>
+                Un univers de formes et de mandalas, où le dessin devient espace sensible
+                et reflet intérieur.
               </p>
             </div>
           </article>
@@ -654,12 +700,12 @@
             Le parcours articule plusieurs dimensions&nbsp;: artistique, éducative, sociale
             et urbaine. Il mobilise écoles, collège, lycée, structures de quartier, habitants
             et partenaires, pour faire de l’intervention artistique un moment de transformation
-            concrète du territoire. :contentReference[oaicite:8]{index=8}
+            concrète du territoire.
           </p>
-          <p>
+          <p style="margin-top:14px;">
             L’extension du projet à des supports comme les armoires techniques renforce aussi
             l’appropriation des objets urbains et contribue à limiter leur dégradation en les
-            requalifiant par l’art. :contentReference[oaicite:9]{index=9}
+            requalifiant par l’art.
           </p>
         </article>
 
@@ -668,8 +714,8 @@
             “Un projet à la fois social, éducatif et artistique.”
           </div>
           <p class="section-intro" style="margin-top:16px;">
-            Cette formule issue de la plaquette résume bien l’ADN du projet, qui relie création,
-            transmission et mise en commun de l’espace vécu. :contentReference[oaicite:10]{index=10}
+            Cette formule résume l’ADN du projet&nbsp;: relier création, transmission
+            et mise en commun de l’espace vécu.
           </p>
         </article>
       </div>
