@@ -1,71 +1,692 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Ville Musée</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parcours Art urbain — Ville Musée</title>
+  <meta name="description" content="Projet de street art participatif : artistes, habitants, écoles et territoire réunis autour d'un parcours d'art urbain." />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0E1A2B;
-      color: white;
+    :root{
+      --bg:#0b1220;
+      --bg-soft:#111a2b;
+      --panel:rgba(255,255,255,0.06);
+      --panel-border:rgba(255,255,255,0.12);
+      --text:#f5f7fb;
+      --muted:#b7c0d4;
+      --accent:#4fd1c5;
+      --accent-2:#f6c445;
+      --max:1120px;
+      --radius:22px;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
     }
-    section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(79,209,197,.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(246,196,69,.10), transparent 25%),
+        linear-gradient(180deg, #0b1220 0%, #0d1526 45%, #0a101c 100%);
+      line-height:1.6;
     }
-    h1, h2 {
-      text-align: center;
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto;
     }
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 12px;
-      margin-top: 20px;
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(16px);
+      background:rgba(11,18,32,.65);
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    img {
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 20px;
+
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+
+    .brand{
+      font-weight:800;
+      letter-spacing:.02em;
+      font-size:1rem;
+    }
+
+    .brand span{
+      color:var(--accent);
+    }
+
+    .menu{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .menu a{
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    .menu a:hover{color:var(--text)}
+
+    .hero{
+      padding:84px 0 56px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .hero-copy,
+    .hero-card{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-copy{
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height:440px;
+    }
+
+    .eyebrow{
+      color:var(--accent);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.78rem;
+      font-weight:700;
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:clamp(2.6rem, 5vw, 5rem);
+      line-height:.95;
+      margin:0 0 20px;
+      letter-spacing:-.04em;
+    }
+
+    .lead{
+      font-size:1.1rem;
+      color:var(--muted);
+      max-width:58ch;
+      margin:0 0 28px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:13px 18px;
+      border-radius:999px;
+      font-weight:700;
+      transition:.2s ease;
+      border:1px solid transparent;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#07131a;
+    }
+
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-secondary{
+      border-color:rgba(255,255,255,.14);
+      color:var(--text);
+      background:rgba(255,255,255,.03);
+    }
+
+    .hero-card{
+      overflow:hidden;
+      min-height:440px;
+      position:relative;
+    }
+
+    .hero-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:contrast(1.03) saturate(.92);
+    }
+
+    .hero-card .overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:24px;
+      background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.75) 100%);
+    }
+
+    .overlay small{
+      color:#d8deed;
+      display:block;
+      margin-bottom:6px;
+      opacity:.9;
+    }
+
+    .section{
+      padding:34px 0 26px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:20px;
+      margin-bottom:22px;
+    }
+
+    .section h2{
+      margin:0;
+      font-size:clamp(1.6rem, 2.5vw, 2.5rem);
+      letter-spacing:-.03em;
+    }
+
+    .section-intro{
+      color:var(--muted);
+      max-width:64ch;
+      margin:10px 0 0;
+    }
+
+    .cards-3{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:20px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.1rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .media-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .media{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .media img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      background:#0a0f18;
+    }
+
+    .media .caption{
+      padding:16px 18px 18px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .video-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .video-card{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:20px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .video-wrap{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      overflow:hidden;
+      border-radius:14px;
+      background:#05080f;
+    }
+
+    .video-wrap iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .video-title{
+      margin:12px 4px 2px;
+      font-weight:700;
+    }
+
+    .artists{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .artist{
+      display:grid;
+      grid-template-columns: 220px 1fr;
+      gap:18px;
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .artist img{
+      width:100%;
+      height:100%;
+      min-height:220px;
+      object-fit:cover;
+    }
+
+    .artist-body{
+      padding:20px 20px 20px 0;
+    }
+
+    .artist-body h3{
+      margin:0 0 8px;
+      font-size:1.25rem;
+    }
+
+    .artist-body p{
+      margin:0;
+      color:var(--muted);
+      font-size:.98rem;
+    }
+
+    .impact{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+    }
+
+    .quote{
+      font-size:1.25rem;
+      line-height:1.45;
+      letter-spacing:-.02em;
+    }
+
+    .footer{
+      padding:56px 0 72px;
+      color:var(--muted);
+    }
+
+    .footer-box{
+      border-top:1px solid rgba(255,255,255,.1);
+      padding-top:24px;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .note{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .impact,
+      .artists,
+      .video-grid,
+      .media-grid,
+      .cards-3{
+        grid-template-columns:1fr;
+      }
+
+      .artist{
+        grid-template-columns:1fr;
+      }
+
+      .artist-body{
+        padding:0 18px 20px;
+      }
+
+      .hero-copy{
+        min-height:auto;
+      }
+
+      .hero-card{
+        min-height:320px;
+      }
+    }
+
+    @media (max-width: 720px){
+      .nav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .menu{
+        gap:12px 14px;
+      }
+
+      .hero{
+        padding-top:56px;
+      }
+
+      .hero-copy{
+        padding:28px;
+      }
+
+      .media img{
+        height:240px;
+      }
     }
   </style>
 </head>
 <body>
 
-<section>
-  <h1>VILLE MUSÉE</h1>
-  <p style="text-align:center;">L’art urbain comme lien social</p>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Parcours <span>Art urbain</span></div>
+      <div class="menu">
+        <a href="#projet">Projet</a>
+        <a href="#videos">Vidéos</a>
+        <a href="#artistes">Artistes</a>
+        <a href="#impact">Impact</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- VIDEO -->
-  <iframe src="https://www.youtube.com/embed/VIDEO1"></iframe>
-</section>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Projet artistique & territorial</div>
+        <h1>Ville Musée</h1>
+        <p class="lead">
+          Un parcours d’art urbain qui relie artistes, habitants, écoles et quartiers
+          autour d’une même ambition&nbsp;: imaginer la ville autrement à travers la
+          création dans l’espace public.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#videos">Voir les vidéos</a>
+          <a class="btn btn-secondary" href="#artistes">Découvrir les artistes</a>
+        </div>
+      </div>
 
-<section>
-  <h2>Le projet</h2>
-  <p>
-    Imaginer sa ville. Un projet collectif réunissant habitants,
-    artistes et écoles autour de la création artistique dans l’espace public.
-  </p>
-</section>
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80" alt="Mur peint dans l'espace urbain" />
+        <div class="overlay">
+          <small>Art urbain • médiation • territoire</small>
+          Une œuvre collective, à la fois sociale, éducative et artistique.
+        </div>
+      </div>
+    </div>
+  </header>
 
-<section>
-  <h2>Les artistes</h2>
-  <p>
-    Reso, El Tono, Wow123, ECB, Jace, GorgOne, Mégot, Zaïtoune...
-  </p>
-</section>
+  <main>
+    <section id="projet" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Le projet</h2>
+            <p class="section-intro">
+              Le projet s’appuie sur une idée simple&nbsp;: faire de l’art urbain un
+              vecteur de lien social, de transmission et d’appropriation sensible du cadre de vie.
+            </p>
+          </div>
+        </div>
 
-<section>
-  <h2>Vidéos</h2>
+        <div class="cards-3">
+          <article class="card">
+            <h3>Imaginer sa ville</h3>
+            <p>
+              Une phase de concertation avec les habitants permet de croiser projets
+              d’aménagement, perceptions du quartier et désirs de transformation.
+            </p>
+          </article>
 
-  <iframe src="https://www.youtube.com/embed/VIDEO2"></iframe>
-  <iframe src="https://www.youtube.com/embed/VIDEO3"></iframe>
-  <iframe src="https://www.youtube.com/embed/VIDEO4"></iframe>
+          <article class="card">
+            <h3>Créer ensemble</h3>
+            <p>
+              Artistes invités, enfants, collégiens, lycéens, étudiants et structures
+              locales participent à la réflexion puis à la réalisation des œuvres.
+            </p>
+          </article>
 
-</section>
+          <article class="card">
+            <h3>Rassembler les quartiers</h3>
+            <p>
+              Les œuvres produites dans différents sites sont ensuite réunies dans un
+              même lieu, pour faire émerger une mémoire commune du projet.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container media-grid">
+        <figure class="media">
+          <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1400&q=80" alt="Façade urbaine et intervention artistique" />
+          <figcaption class="caption">
+            Le parcours déploie l’art dans l’espace collectif et transforme le quotidien en expérience visuelle partagée.
+          </figcaption>
+        </figure>
+
+        <figure class="media">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1400&q=80" alt="Atelier artistique avec des jeunes" />
+          <figcaption class="caption">
+            Les temps de médiation associent établissements scolaires, habitants, artistes et partenaires de terrain.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="videos" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Vidéos</h2>
+            <p class="section-intro">
+              Remplace simplement chaque <strong>VIDEO_ID_X</strong> par l’identifiant de ta vidéo YouTube.
+            </p>
+          </div>
+        </div>
+
+        <div class="video-grid">
+          <article class="video-card">
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Vidéo 1" allowfullscreen></iframe>
+            </div>
+            <div class="video-title">Présentation du projet</div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Vidéo 2" allowfullscreen></iframe>
+            </div>
+            <div class="video-title">Interventions dans l’espace urbain</div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Vidéo 3" allowfullscreen></iframe>
+            </div>
+            <div class="video-title">Rencontres et médiations</div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-wrap">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="Vidéo 4" allowfullscreen></iframe>
+            </div>
+            <div class="video-title">Parcours et réalisations</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="artistes" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Les artistes</h2>
+            <p class="section-intro">
+              Le projet réunit artistes invités et artistes ancrés sur le territoire,
+              dans une logique de dialogue entre écritures, générations et contextes urbains. :contentReference[oaicite:1]{index=1}
+            </p>
+          </div>
+        </div>
+
+        <div class="artists">
+          <article class="artist">
+            <img src="https://images.unsplash.com/photo-1545231027-637d2f6210f8?auto=format&fit=crop&w=1200&q=80" alt="Artiste Reso" />
+            <div class="artist-body">
+              <h3>Reso</h3>
+              <p>
+                Une écriture portée par le mouvement, la courbe et l’énergie. Son travail
+                s’inscrit dans une recherche graphique issue du graffiti, tendue vers
+                l’abstraction et le rythme du geste. :contentReference[oaicite:2]{index=2}
+              </p>
+            </div>
+          </article>
+
+          <article class="artist">
+            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80" alt="Artiste El Tono" />
+            <div class="artist-body">
+              <h3>El Tono</h3>
+              <p>
+                Un travail attentif à la ville, à la limite entre espace public et espace privé,
+                où l’intervention devient jeu perceptif, déplacement du regard et mise en tension du quotidien. :contentReference[oaicite:3]{index=3}
+              </p>
+            </div>
+          </article>
+
+          <article class="artist">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Artiste Wow123" />
+            <div class="artist-body">
+              <h3>Wow123</h3>
+              <p>
+                Une pratique hybride mêlant abstraction, éléments figuratifs et culture graffiti,
+                avec une forte dynamique de circulation internationale et de recherche picturale. :contentReference[oaicite:4]{index=4}
+              </p>
+            </div>
+          </article>
+
+          <article class="artist">
+            <img src="https://images.unsplash.com/photo-1529429617124-aee711a5ac1c?auto=format&fit=crop&w=1200&q=80" alt="Artiste ECB" />
+            <div class="artist-body">
+              <h3>ECB</h3>
+              <p>
+                Des portraits monumentaux, souvent monochromes, qui installent dans la ville
+                des présences silencieuses et puissantes, à la fois humaines et architecturales. :contentReference[oaicite:5]{index=5}
+              </p>
+            </div>
+          </article>
+
+          <article class="artist">
+            <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=80" alt="Artistes locaux" />
+            <div class="artist-body">
+              <h3>Artistes du territoire</h3>
+              <p>
+                Jace, Gorg One, Mégot, Zaïtoune et d’autres artistes locaux donnent au projet
+                son ancrage vivant, sa singularité et sa capacité à dialoguer avec les imaginaires du lieu. :contentReference[oaicite:6]{index=6}
+              </p>
+            </div>
+          </article>
+
+          <article class="artist">
+            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80" alt="Processus collectif" />
+            <div class="artist-body">
+              <h3>Une création collective</h3>
+              <p>
+                Au-delà des signatures, le projet valorise le processus&nbsp;: rencontres,
+                ateliers, présence dans les quartiers, réalisation in situ et inauguration commune. :contentReference[oaicite:7]{index=7}
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact" class="section">
+      <div class="container impact">
+        <article class="card">
+          <h2>Impact territorial</h2>
+          <p>
+            Le parcours articule plusieurs dimensions&nbsp;: artistique, éducative, sociale
+            et urbaine. Il mobilise écoles, collège, lycée, structures de quartier, habitants
+            et partenaires, pour faire de l’intervention artistique un moment de transformation
+            concrète du territoire. :contentReference[oaicite:8]{index=8}
+          </p>
+          <p>
+            L’extension du projet à des supports comme les armoires techniques renforce aussi
+            l’appropriation des objets urbains et contribue à limiter leur dégradation en les
+            requalifiant par l’art. :contentReference[oaicite:9]{index=9}
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="quote">
+            “Un projet à la fois social, éducatif et artistique.”
+          </div>
+          <p class="section-intro" style="margin-top:16px;">
+            Cette formule issue de la plaquette résume bien l’ADN du projet, qui relie création,
+            transmission et mise en commun de l’espace vécu. :contentReference[oaicite:10]{index=10}
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="footer">
+    <div class="container footer-box">
+      <div>
+        <strong>Parcours Art urbain</strong><br />
+        Démo web du projet
+      </div>
+      <div class="note">
+        Remplacer les images d’exemple par tes vraies photos et insérer les 4 liens YouTube.
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
