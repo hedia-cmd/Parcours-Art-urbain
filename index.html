@@ -299,6 +299,55 @@
       font-weight:700;
     }
 
+    .press-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .press-card{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:20px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .press-meta{
+      color:var(--accent);
+      font-size:.85rem;
+      font-weight:700;
+      margin-bottom:10px;
+      letter-spacing:.03em;
+    }
+
+    .press-card h3{
+      margin:0 0 10px;
+      font-size:1.08rem;
+      line-height:1.35;
+    }
+
+    .press-card p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    .press-card a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:700;
+    }
+
+    .press-card a:hover{
+      background:rgba(255,255,255,.1);
+    }
+
     .artist-gallery{
       display:grid;
       grid-template-columns:repeat(4, 1fr);
@@ -531,7 +580,8 @@
     }
 
     @media (max-width: 1100px){
-      .artist-gallery{
+      .artist-gallery,
+      .press-grid{
         grid-template-columns:repeat(3, 1fr);
       }
     }
@@ -541,7 +591,8 @@
       .impact,
       .video-grid,
       .media-grid,
-      .cards-3{
+      .cards-3,
+      .press-grid{
         grid-template-columns:1fr;
       }
 
@@ -641,6 +692,7 @@
         <a href="#videos">Vidéos</a>
         <a href="#artistes">Artistes</a>
         <a href="#impact">Impact</a>
+        <a href="#presse">Presse</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -705,7 +757,9 @@
           <article class="card">
             <h3>Un parcours dans la ville</h3>
             <p>
-              Les œuvres produites dans différents sites sont visibles à travers un parcours; Impact fort : - visites guidés à pied, à vélo - pattractivité des amateurs de street art - relais réseuax.
+              Les œuvres produites dans différents sites deviennent un parcours visible dans la ville :
+              visites guidées à pied ou à vélo, attractivité pour les amateurs de street art,
+              et fort potentiel de relais sur les réseaux.
             </p>
           </article>
         </div>
@@ -736,7 +790,7 @@
           <div>
             <h2>Vidéos</h2>
             <p class="section-intro">
-              Remplace les liens ci-dessous par tes vidéos finales. La deuxième carte intègre déjà le reel Facebook.
+              Une sélection de vidéos pour découvrir le projet, son impact territorial et ses réalisations.
             </p>
           </div>
         </div>
@@ -745,50 +799,62 @@
           <article class="video-card">
             <div class="video-wrap">
               <iframe
-  src="https://www.youtube.com/embed/wm-jZp3EFC0"
-  title="Vidéo 1"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
+                src="https://www.youtube.com/embed/wm-jZp3EFC0"
+                title="Vidéo 1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
             </div>
-            <div class="video-title">Action dans les quartiers prioritaires-cohésion et liens intergénérationnels renforcés</div>
+            <div class="video-title">Action dans les quartiers prioritaires — cohésion et liens intergénérationnels renforcés</div>
           </article>
 
           <article class="video-card">
-  <div class="video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/6p3EKWl92Bg"
-      title="Vidéo"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
-  <div class="video-title">Titre de la vidéo</div>
-</article>
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/6p3EKWl92Bg"
+                title="Vidéo 2"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-title">Titre de la vidéo</div>
+          </article>
 
           <article class="video-card">
-  <div class="video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/ZUMPqllEpKk"
-      title="Vidéo"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
-  <div class="video-title">Ville musée-diffusion RTBF-TV5monde- un rayonnement fort pour la ville</div>
-</article>
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/ZUMPqllEpKk"
+                title="Vidéo 3"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-title">Ville Musée — diffusion RTBF / TV5Monde, un rayonnement fort pour la ville</div>
+          </article>
 
           <article class="video-card">
-  <div class="video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/mN4ALPvGLYI"
-      title="Vidéo"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
-  <div class="video-title">Jace et Gorg1- 800m2</div>
-</article>
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/mN4ALPvGLYI"
+                title="Vidéo 4"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-title">Jace et Gorg One — 800 m²</div>
+          </article>
+
+          <article class="video-card">
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID_5"
+                title="Vidéo 5"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-title">Titre de la cinquième vidéo</div>
+          </article>
         </div>
       </div>
     </section>
@@ -851,7 +917,7 @@
             <img src="images/seth.avif" alt="Seth" />
             <div class="artist-card-body">
               <h3>Seth <span>— France</span></h3>
-              <p>Un langage visuel hybride mêlant abstraction, typographie graffiti et influences internationales.</p>
+              <p>Seth développe une peinture reconnaissable en travaillant sur le thème de l’enfance.</p>
             </div>
           </article>
 
@@ -966,6 +1032,51 @@
         </article>
       </div>
     </section>
+
+    <section id="presse" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Presse</h2>
+            <p class="section-intro">
+              Une sélection d’articles et de publications pour découvrir le projet à travers différents regards.
+            </p>
+          </div>
+        </div>
+
+        <div class="press-grid">
+          <article class="press-card">
+            <div class="press-meta">Média • Date</div>
+            <h3>Titre de l’article 1</h3>
+            <p>
+              Quelques lignes de présentation pour résumer l’angle de l’article :
+              projet participatif, médiation, transformation urbaine, rayonnement du territoire.
+            </p>
+            <a href="LIEN_ARTICLE_1" target="_blank" rel="noopener noreferrer">Lire l’article</a>
+          </article>
+
+          <article class="press-card">
+            <div class="press-meta">Média • Date</div>
+            <h3>Titre de l’article 2</h3>
+            <p>
+              Un second article peut mettre en avant les artistes invités, les ateliers
+              menés avec les habitants ou l’appropriation des œuvres par le public.
+            </p>
+            <a href="LIEN_ARTICLE_2" target="_blank" rel="noopener noreferrer">Lire l’article</a>
+          </article>
+
+          <article class="press-card">
+            <div class="press-meta">Média • Date</div>
+            <h3>Titre de l’article 3</h3>
+            <p>
+              Cette carte peut aussi accueillir une émission radio, un reportage TV,
+              un article web ou une publication institutionnelle sur le projet.
+            </p>
+            <a href="LIEN_ARTICLE_3" target="_blank" rel="noopener noreferrer">Lire l’article</a>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer id="contact" class="footer">
@@ -975,7 +1086,7 @@
         Démo web du projet
       </div>
       <div class="note">
-        Remplace les placeholders vidéo par tes liens définitifs si besoin.
+        Remplace les placeholders vidéo et presse par tes liens définitifs.
       </div>
     </div>
   </footer>
